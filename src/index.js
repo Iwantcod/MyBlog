@@ -8,7 +8,12 @@ import { BrowserRouter } from 'react-router-dom';     // Link 태그를 사용�
 import AppLayout from './components/AppLayout';
 import App from './App';
 
+
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 root.render(
   <React.StrictMode>
 

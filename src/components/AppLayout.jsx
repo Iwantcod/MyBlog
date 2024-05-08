@@ -3,19 +3,14 @@ import { Col, Menu, Row } from 'antd';
 import { Link } from 'react-router-dom';
 import UserProfile from "./UserProfile";
 import LoginForm from "./LoginForm";
-import { useState } from "react";
 
-
+import { useSelector, useDispatch } from "react-redux";
 
 const AppLayout = ({ children }) => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);    // 임시로 만든것
 
-  const [profile, setProfile] = useState({});
+  const { isLoggedIn } = useSelector(state => state.user);
 
-  const dummyUser = {
-    username: null,
-  };
 
   const items = [
     {
@@ -35,7 +30,7 @@ const AppLayout = ({ children }) => {
         <Link to="/signup">Signup</Link>
       ),
       key: "signup",
-    },
+    },  
   ];
 
   return (
@@ -48,11 +43,11 @@ const AppLayout = ({ children }) => {
       <Row gutter={8}>
         <Col xs={24} md={6}>
           {isLoggedIn
-          ? <UserProfile setIsLoggedIn={setIsLoggedIn} profile={profile} setProfile={setProfile} dummyUser={dummyUser}/>
-          : <LoginForm setIsLoggedIn={setIsLoggedIn} setProfile={setProfile} dummyUser={dummyUser}/>}
+          ? <UserProfile/>
+          : <LoginForm/>}
         </Col>
         <Col xs={24} md={12}>
-        {children}
+          {children}
         </Col>
         <Col xs={24} md={6}>
             <a href="https://github.com/Iwantcod" target="_blank">Iwantcod's Github</a>

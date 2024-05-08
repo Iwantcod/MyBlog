@@ -3,7 +3,8 @@
 
 
 export const initialState = {
-  userName: null,
+  isLoggedIn: false,  // 로그인 상태
+  userInfo: null,     // 로그인 유저의 정보
 
   logInLoading: false,
   logInFailure: false,
@@ -19,6 +20,8 @@ export const initialState = {
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+export const LOG_IN_ACTION = 'LOG_IN_ACTION';
+export const LOG_OUT_ACTION = 'LOG_OUT_ACTION';
 
 export const logInRequestAction = (data) => {
   return {
@@ -27,18 +30,45 @@ export const logInRequestAction = (data) => {
   }
 }
 
+export const logInAction = (data) => (
+  {
+    type: LOG_IN_ACTION,
+    data,
+  }
+)
+
+export const logOutAction = () => (
+  {
+    type: LOG_OUT_ACTION,
+  }
+)
+
+
+
+
 export default (state = initialState, action) => {
   switch(action.type) {
-    case LOG_IN_REQUEST: {
+    case LOG_IN_REQUEST:
       return {
         ...state,
         logInLoading: true,
       };
-    }
-    default: {
+    case LOG_IN_ACTION:
       return {
         ...state,
+        isLoggedIn: true,
+        userInfo: {
+          ...state,
+          username: action.data,
+        },
       };
-    }
+    case LOG_OUT_ACTION:
+      return {
+        ...state,
+        userInfo: null,
+        isLoggedIn: false,
+      };
+    default:
+      return state;
   }
 };

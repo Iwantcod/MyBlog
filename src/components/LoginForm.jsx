@@ -1,20 +1,20 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from 'antd';
+import { useDispatch, useSelector } from "react-redux";
+import { logInAction } from "../reducer/user";
 
 
 
+const LoginForm = () => {
+  const dispatch = useDispatch();
 
-const LoginForm = (props) => {
-  const setIsLoggedIn = props.setIsLoggedIn;
-  const setProfile = props.setProfile;
-  const dummyUser = props.dummyUser;
+
   
 
   const onFinish = (values) => {
     console.log('Success:', values);
-    dummyUser.username = values.username;
-    setIsLoggedIn(true);
-    setProfile(dummyUser);
+    dispatch(logInAction(values.username));
+
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
