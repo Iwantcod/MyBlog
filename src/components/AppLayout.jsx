@@ -15,7 +15,7 @@ const AppLayout = ({ children }) => {
   const items = [
     {
       label: (
-        <Link to="/">Home</Link>
+        <Link to="/MyBlog">Home</Link>
       ),
       key: "home",
     },
