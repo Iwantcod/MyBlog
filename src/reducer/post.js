@@ -3,20 +3,7 @@
 
 export const initialState = {
 
-  postList: [
-    {
-      id: 1,
-      postUser: "Andy",
-      postText: "Dummy Post 1",
-      img: "https://images.unsplash.com/photo-1714907135093-e60f0a730574?q=80&w=3018&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      id: 2,
-      postUser: "Tony",
-      postText: "Dummy Post 2",
-      img: "https://images.unsplash.com/photo-1714924969684-b9d76c6030b8?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    }
-  ],
+  postList: [],
   postLoading: false,
   postFailure: false,
   postSuccess: false,
@@ -29,38 +16,68 @@ export const initialState = {
 export const POST_REQUEST = 'POST_REQUEST';
 export const POST_SUCCESS = 'POST_SUCCESS';
 export const POST_FAILURE = 'POST_FAILURE';
+export const DELETE_REQUEST = 'DELETE_REQUEST';
+export const UPDATE_REQUEST = 'UPDATE_REQUEST';
 
 
-export const postRequestAction = (data) => {
+export const postAction = (data) => {
   return {
     type: POST_REQUEST,
     data,
   }
 }
 
-export const postSuccessAction = () => {
+export const removeAction = (data) => {
   return {
-    type: POST_SUCCESS,
+    type: DELETE_REQUEST,
+    data,
+  }
+}
+
+export const updateAction = (data) => {
+  return {
+    type: UPDATE_REQUEST,
+    data,
   }
 }
 
 
-export default (state = initialState, action) => {
+const post = (state = initialState, action) => {
   switch(action.type) {
     case POST_REQUEST:
       return {
         ...state,
         postList: [
-          ...state,
           {
-            id: 3,
-            postUser: "Jake",
-            postText: action.data,
-            img: null,
+            id: Math.floor(Date.now() / 1000),
+            postUser: action.data[2],
+            postText: action.data[0],
+            img: action.data[1]
           },
+          ...state.postList,      // 복사할 타겟을 상세하기 적어줘야 한다.(배열이나 객체를 복사하는 경우에 해당.)
         ],
+      }
+    case DELETE_REQUEST:
+      return {
+        ...state,
+        postList: [
+          ...state.postList.filter((v) => v.id !== action.data),
+        ],
+      }
+    case UPDATE_REQUEST:
+      return {
+        ...state,
+        postList: [
+          ...state.postList.filter((v) => {
+            if(v.id === action.data) {
+              
+            }
+          })
+        ]
       }
     default:
       return state;
   }
 };
+
+export default post;

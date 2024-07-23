@@ -11,6 +11,7 @@ export const initialState = {
   logInSuccess: false,
 
   signInLoading: false,
+
   signInFailure: false,
   signInSuccess: false,
 
@@ -23,12 +24,7 @@ export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
 export const LOG_IN_ACTION = 'LOG_IN_ACTION';
 export const LOG_OUT_ACTION = 'LOG_OUT_ACTION';
 
-export const logInRequestAction = (data) => {
-  return {
-    type: LOG_IN_REQUEST,
-    data,
-  }
-}
+
 
 export const logInAction = (data) => (
   {
@@ -46,7 +42,7 @@ export const logOutAction = () => (
 
 
 
-export default (state = initialState, action) => {
+const user = (state = initialState, action) => {
   switch(action.type) {
     case LOG_IN_REQUEST:
       return {
@@ -57,8 +53,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        userInfo: {
-          ...state,
+        userInfo: {     // 유저의 정보는 로그아웃 시 null로 만들기 때문에, 복사해올 것이 없다.
           username: action.data,
         },
       };
@@ -72,3 +67,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default user;

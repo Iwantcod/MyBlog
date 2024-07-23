@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from 'antd';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logInAction } from "../reducer/user";
 
 
@@ -14,7 +14,7 @@ const LoginForm = () => {
   const onFinish = (values) => {
     console.log('Success:', values);
     dispatch(logInAction(values.username));
-
+    localStorage.setItem('id', values.username);
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);

@@ -15,6 +15,7 @@ const UserProfile = () => {
 
   const onClickBtn = (e) => {   // 로그아웃 버튼 클릭 이벤트
     dispatch(logOutAction());
+    localStorage.removeItem('id');
   }
   
   const StyledImage = styled.img`

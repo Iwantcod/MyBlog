@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import UserProfile from "./UserProfile";
 import LoginForm from "./LoginForm";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const AppLayout = ({ children }) => {
 
@@ -50,7 +50,7 @@ const AppLayout = ({ children }) => {
           {children}
         </Col>
         <Col xs={24} md={6}>
-            <a href="https://github.com/Iwantcod" target="_blank">Iwantcod's Github</a>
+            <a href="https://github.com/Iwantcod" target="_blank" rel="noreferrer">Iwantcod's Github</a>
         </Col>
         
       </Row>
